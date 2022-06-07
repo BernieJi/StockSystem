@@ -34,9 +34,14 @@ h1{
     color:#f8f9fa;
 }
 
-.loginform input[type="text"], .login input[type="password"]{
+.loginform input[type="text"],.loginform input[type="password"]{
     border: 2px solid #3498db;
     width:220px;
+}
+
+.loginform input[type="checkbox"]{
+	margin:5px;
+    display:inline;
 }
 
 .loginform input[type="submit"]{
@@ -45,7 +50,7 @@ h1{
     cursor:pointer;
 }
 
-.loginform input[type="text"]:focus, .login input[type="password"]:focus{
+.loginform input[type="text"]:focus,.loginform input[type="password"]:focus{
     border-color:#2ecc71;
     width:280px;
     transition:0.5s;
