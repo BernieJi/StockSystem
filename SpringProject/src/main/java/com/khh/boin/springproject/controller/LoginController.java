@@ -28,7 +28,8 @@ public class LoginController {
 	}
 	// 登入成功
 	@RequestMapping("/index")
-	public String index() {
+	public String index(@ModelAttribute Users users,Model model) {
+		model.addAttribute("users",users);
 		return "index";
 	}
 	// 登入失敗
@@ -54,4 +55,9 @@ public class LoginController {
 		return "redirect:./loginpage";
 	}
 	
+	// 管理員頁面
+	@RequestMapping("/adminpage")
+	public String admin(){
+		return "adminpage";
+		}
 }

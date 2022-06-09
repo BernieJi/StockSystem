@@ -28,9 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		Users users = userRepository.getByUsername(username);
 		if(users == null) 
 			throw new UsernameNotFoundException("Not found!");
-		
 		// 2.取得相關資料並進行密碼比對
-		List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList("role");
+		List<GrantedAuthority> auths = AuthorityUtils.commaSeparatedStringToAuthorityList(users.getAuthority());
 		return new User(username,
 			       users.getPassword(),
 			       auths);
