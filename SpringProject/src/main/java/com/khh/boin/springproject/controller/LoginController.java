@@ -51,6 +51,7 @@ public class LoginController {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(users.getPassword());
 		users.setPassword(encodedPassword);
+		users.setAuthority("user");
 		userRepository.save(users);
 		return "redirect:./loginpage";
 	}
