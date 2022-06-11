@@ -67,6 +67,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         	// 有兩種處理方式(二擇一）
         	//.accessDeniedPage("/errorpage")
         	.accessDeniedHandler(myAccessDeniedHandler);
+        
+        // remember-me
+        http.rememberMe()
+        	.userDetailsService(userDetailsService)
+        	.tokenValiditySeconds(60 * 60 * 3); // 通常都會大於 session timeout的時間(30mins)
 	}
 
 	@Bean
