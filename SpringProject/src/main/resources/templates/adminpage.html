@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.themeleaf.org">
     <head>
         <title>AdminPage</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
-        <h1>管理員才能進來的頁面</h1>
+    	<div th:object="${ userss}" style="position:relative;top:50px;left:260px">
+			<table class="pure-table pure-table-bordered">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>username</th>
+						<th>email</th>
+						<th>編輯</th>
+						<th>刪除</th>		
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="users,stat :${userss}">
+						<td th:text="${stat.index}">索引</td>
+						<td th:text="${users.username}">帳戶名稱</td>
+						<td th:text="${users.email}">Email</td>
+						<td><button class="btn btn-success">編輯資訊</button></td>
+						<td><button class="btn btn-warning">刪除用戶</button></td>
+					</tr>
+				</tbody>
+			</table>  
+		</div>		
     </body>
 </html>

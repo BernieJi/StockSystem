@@ -1,5 +1,7 @@
 package com.khh.boin.springproject.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,13 +46,14 @@ public class LoginController {
 		return "register";
 	}
 	
-	// 註冊成功
+	// 註冊頁面
 	@PostMapping("/register")
 	public String registerSuccesss(@Valid @ModelAttribute Users users,BindingResult result,Model model) {
 		if(result.hasErrors()) return "註冊失敗";
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(users.getPassword());
 		users.setPassword(encodedPassword);
+		// 一般會員權限設定為user
 		users.setAuthority("user");
 		userRepository.save(users);
 		return "redirect:./loginpage";
@@ -58,7 +61,12 @@ public class LoginController {
 	
 	// 管理員頁面
 	@RequestMapping("/adminpage")
-	public String admin(){
+	public String admin(@ModelAttribute Users users,Model model){
+		List<Users> userss = userRepository.findAll();
+		model.addAttribute("_method","PUT");
+		model.addAttribute("userss",userss);
 		return "adminpage";
 		}
+	
+	
 }

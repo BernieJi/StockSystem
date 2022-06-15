@@ -34,4 +34,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 			       users.getPassword(),
 			       auths);
 	}
+	
+	// 新增用戶（註冊用戶）
+	
+	// 編輯用戶資訊
+	
+	// 刪除用戶
+	
 }

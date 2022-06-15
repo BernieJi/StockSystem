@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		String[] permitted = {"/loginpage","/registerform"};
+		
 		
 		// 表單提交
 		http.formLogin()
@@ -39,9 +39,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.failureForwardUrl("/fail");
 		
 		// 授權認證
+		String[] permitted = {"/loginpage","/registerform","/css/*", "/js/*", "/images/*"};
 		http.authorizeHttpRequests()
-        // 不需要被認證的頁面：/loginpage,/registerform
+        // 不需要被認證的頁面：/loginpage,/registerform 與資源檔
         .antMatchers(permitted).permitAll()
+        
         // 權限判斷
         // 必須要有 admin權限才可以訪問
         .antMatchers("/adminpage").hasAuthority("admin")
