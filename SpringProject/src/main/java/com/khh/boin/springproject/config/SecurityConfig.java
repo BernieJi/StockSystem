@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// 表單提交
 		http.formLogin()
 			// loginpage.html 表單 action 內容
-			.loginProcessingUrl("/login")
+			.loginProcessingUrl("/index")
 			// 自定義的登入頁面
 			.loginPage("/loginpage")
 			// 登入成功後造訪的頁面
@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.failureForwardUrl("/fail");
 		
 		// 授權認證
-		String[] permitted = {"/loginpage","/registerform","/css/*", "/js/*", "/images/*"};
+		String[] permitted = {"/loginpage","/registerform","/css/**", "/js/**", "/images/**"};
 		http.authorizeHttpRequests()
         // 不需要被認證的頁面：/loginpage,/registerform 與資源檔
         .antMatchers(permitted).permitAll()

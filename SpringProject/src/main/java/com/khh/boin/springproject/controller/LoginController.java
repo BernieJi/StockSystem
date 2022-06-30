@@ -1,7 +1,5 @@
 package com.khh.boin.springproject.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.khh.boin.springproject.entity.Users;
-import com.khh.boin.springproject.repository.UserRepository;
+import com.khh.boin.springproject.repository.UsersRepository;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UsersRepository usersRepository;
 	
 	@GetMapping("/loginpage")
 	public String loginpage() {
@@ -55,18 +53,8 @@ public class LoginController {
 		users.setPassword(encodedPassword);
 		// 一般會員權限設定為user
 		users.setAuthority("user");
-		userRepository.save(users);
+		usersRepository.save(users);
 		return "redirect:./loginpage";
 	}
-	
-	// 管理員頁面
-	@RequestMapping("/adminpage")
-	public String admin(@ModelAttribute Users users,Model model){
-		List<Users> userss = userRepository.findAll();
-		model.addAttribute("_method","PUT");
-		model.addAttribute("userss",userss);
-		return "adminpage";
-		}
-	
-	
+		
 }

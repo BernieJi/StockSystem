@@ -6,14 +6,16 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     	<link rel="stylesheet" href="css/index.css">
+		<link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css"> 
     	<!-- 導入JQuery -->
-    	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    	<!-- 導入JavaScript 檔案 -->
     	<script type="text/javascript" src="js/index.js"></script>
     	<!-- 導入FontAwesome -->
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     	<!-- 導入Bootstrap -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
     <body th:object="${ users}">
@@ -32,7 +34,7 @@
 	    					<a href="/index/stock">股票 <i class="fa-solid fa-arrow-trend-up"></i></a>
 	    				</li>
 	    				<li>
-	    					<a href="#">虛擬貨幣 <i class="fa-brands fa-bitcoin"></i></a>
+	    					<a href="#">交易系統 <i class="fa-brands fa-bitcoin"></i></a>
 	    				</li>
 	    				<li>
 	    					<a href="#">個人追蹤列表 <i class="fa-solid fa-wallet"></i></a>
@@ -41,7 +43,7 @@
 	    					<a href="/index/information">修改個人資料 <i class="fa-solid fa-gear"></i></a>
 	    				</li>
 	    				<li>
-	    					<a sec:authorize="hasAuthority('admin')" href="/adminpage">管理員頁面 <i class="fa-solid fa-people-roof"></i></a>
+	    					<a sec:authorize="hasAuthority('admin')" href="/index/adminpage">管理員頁面 <i class="fa-solid fa-people-roof"></i></a>
 	    				</li>
 	    				<li>
 	    					<a sec:authorize="hasAnyAuthority('admin','user')" href="/logout">登出 <i class="fa-solid fa-right-from-bracket"></i></a>
@@ -52,7 +54,8 @@
 			
 			<div class="container-middle">
 				<div class="container-fluid">
-					<p th:text="*{ username} + 您好！歡迎回來金融理財系統">name</p>
+					<p th:text="*{ username} + ' ' + 您好！歡迎回來金融理財系統">name</p>
+					<h5>登入資訊：</h5>
 					<ul>
 						<li>登入帳號：<span sec:authentication="principal.username"></span></li>
 						<li>權限：<span sec:authentication="authorities"></span></li>
@@ -60,6 +63,30 @@
 						<li>Session Id:<span sec:authentication="details.sessionId"></span></li>
 						<li>登入時間：<span id="time"></span></li>
 					</ul>
+					<br />
+					<br />
+					<div>
+						<h4>修改個人資訊</h4>
+						<table class="pure-table pure-table-bordered">
+							<thead>
+								<tr>
+									<th>使用者帳號</th>
+									<th>使用者密碼</th>
+									<th>使用者Email</th>
+									<th>編輯</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td th:text="*{ username}">使用者帳號</td>
+									<td th:text="*{ password}">使用者密碼</td>
+									<td th:text="*{email}">使用者信箱</td>
+									<td><button class="btn btn-success">編輯</button></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
 						
 					<script type="text/javascript">
 						var loginDate = new Date();
@@ -72,14 +99,26 @@
 	        <div class="container-right">
 	        	<fieldset class="tracking-cloumn">
 	        		<legend>追蹤列表</legend>
+	        			<table class="pure-table pure-table-bordered">
+							<tr>
+								<th>項目</th>
+								<th>當前價格</th>
+							</tr>
+							<tr>
+								<td>123</td>
+								<td>456</td>
+							</tr>		
+						
+						</table>
 	        	</fieldset>
 	        </div>     
         </div>
         <!-- <button sec:authorize="hasAuthority('admin')">管理按鈕</button>  --> 
        	
      
-       	<!-- <footer style="position:fixed;bottom:0px;left:600px">
-    		<p>© Financial System 2022/06/06 0912-345-678</p>
-  		</footer>  -->
+       	<footer>
+			<br/>
+    		<center> © Financial System 2022/06/06 0912-345-678</center>
+  		</footer>
     </body>
 </html>

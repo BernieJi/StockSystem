@@ -1,15 +1,6 @@
 package com.khh.boin.springproject.repository;
 
-import java.util.Date;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.security.config.authentication.PasswordEncoderParser;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.khh.boin.springproject.entity.Users;
@@ -22,8 +13,9 @@ import com.khh.boin.springproject.entity.Users;
 */
 
 @Repository
-public interface UserRepository extends JpaRepository<Users, Integer> {
+public interface UsersRepository extends JpaRepository<Users, Integer> {
 	
 	Users getByUsername(String username);
-			
+		
+	
 }
