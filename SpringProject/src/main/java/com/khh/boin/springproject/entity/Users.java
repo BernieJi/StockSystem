@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -17,21 +18,29 @@ import lombok.NoArgsConstructor;
 public class Users {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@SequenceGenerator(
+			name="users_sequence",
+			sequenceName = "users_sequence",
+			allocationSize = 1
+			)
+	@GeneratedValue(
+			strategy = GenerationType.SEQUENCE,
+			generator = "users_sequence"
+			)
+	public Integer id;
 	
 	@Size(min = 2,max = 50,message = "{user.username.size}")
 	@NotEmpty(message = "{user.username.empty}")
-	private String username;
+	public String username;
 	
 	@NotEmpty(message = "{user.password.empty}")
-	private String password;
+	public String password;
 	
 	@Size(min = 2,max = 50,message = "{user.email.size}")
 	@NotEmpty(message = "{user.email.empty}")
-	private String email;
+	public String email;
 	
-	private String authority;
+	public String authority;
 
 	public Integer getId() {
 		return id;

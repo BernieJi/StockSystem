@@ -4,16 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.khh.boin.springproject.handle.MyAccessDeniedHandler;
+import com.khh.boin.springproject.service.UserDetailsServiceImpl;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
@@ -24,7 +26,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
 		
 		// 表單提交
 		http.formLogin()
@@ -39,11 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.failureForwardUrl("/fail");
 		
 		// 授權認證
-		String[] permitted = {"/loginpage","/registerform","/css/**", "/js/**", "/images/**"};
+		String[] permitted = {"/loginpage","/registerform","/css/**","/images/**","/js/**","index/**"};
 		http.authorizeHttpRequests()
         // 不需要被認證的頁面：/loginpage,/registerform 與資源檔
         .antMatchers(permitted).permitAll()
-        
         // 權限判斷
         // 必須要有 admin權限才可以訪問
         .antMatchers("/adminpage").hasAuthority("admin")
@@ -76,6 +76,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         	.tokenValiditySeconds(60 * 60 * 3); // 通常都會大於 session timeout的時間(30mins)
 	}
 
+//	@Bean
+//	 public UserDetailsService accountUserDetailService() {
+//	  return new UserDetailsServiceImpl();
+//	 }
+	
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
