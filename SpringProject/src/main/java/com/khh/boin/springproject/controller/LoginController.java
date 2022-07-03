@@ -51,9 +51,9 @@ public class LoginController {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedPassword = encoder.encode(users.getPassword());
 		users.setPassword(encodedPassword);
-		// 一般會員權限設定為user
+		// 一般註冊會員authority設定為user
 		users.setAuthority("user");
-		usersRepository.save(users);
+		usersRepository.saveAndFlush(users);
 		return "redirect:./loginpage";
 	}
 		

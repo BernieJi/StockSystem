@@ -25,6 +25,7 @@
 				<input type="text" id="myInput" placeholder="請輸入股票代號查詢 例:0050" style="width:250px">
 			</form>
 
+			
 			<table id="myTable" class="pure-table pure-table-bordered">
 				<thead>
 					<tr>
@@ -38,11 +39,11 @@
 						<th>當日最低價</th>
 						<th>詳細資訊</th>
 						<th>交易</th>		
-						
 					</tr>
 				</thead>
+
 				<tbody id="myBody">
-					<tr th:each="stock,stat :${stocks}">
+					<tr th:each="stock,stat:${stocks}">
 						<td th:text="${stat.count}"></td>
 						<td th:text="${stock.Code}"></td>
 						<td th:text="${stock.Name}"></td>
@@ -51,36 +52,35 @@
 						<td th:text="${stock.ClosingPrice}"></td>
 						<td th:text="${stock.HighestPrice}"></td>
 						<td th:text="${stock.LowestPrice}"></td>
-						<td><button class="btn btn-info"data-bs-toggle="modal" data-bs-target="#stockInfo">詳細資訊</button></td>
-						
-						<div class="modal fade" id="stockInfo">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<!-- Header -->
-									<div class="modal-header">
-										<h4>股票詳細資訊</h4>
-										<a type="button" th:href="@{/index/stock/watchlist(stockcode=${stock.Code})}" id="addWatch" data-bs-toggle="popover" title="123" data-bs-content="將此檔股票加入追蹤清單"><i class="fa-solid fa-circle-plus"></i></a>
-										<button class="btn-close" data-bs-dismiss="modal"></button>
+						<td><button class="btn btn-info"data-bs-toggle="modal" data-bs-target="#stockInfo">詳細資訊</button>
+							<div class="modal fade" id="stockInfo">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<!-- Header -->
+										<div class="modal-header">
+											<h4>股票詳細資訊</h4>
+											<a type="button" th:href="@{/index/stock/watchlist/{stockcode}(stockcode=${stock.Code})}"><i class="fa-solid fa-circle-plus"></i>將股票加入追蹤清單</a>
+											<button class="btn-close" data-bs-dismiss="modal"></button>
+										</div>
+										<!-- Body -->
+										<div class="modal-body"></div>
+										<p th:text="${stock.Code}">股票代號</p>
+										<p th:text="${stock.Name}">股票名稱</p>
+										<!-- Footer -->
+										<!-- <div class="modal-footer"></div>
+										<p>Footer</p> -->
 									</div>
-									<!-- Body -->
-									<div class="modal-body"></div>
-									<p th:text="${stock.Code}">股票代號</p>
-									<p th:text="${stock.Name}">股票名稱</p>
-									<!-- Footer -->
-									<div class="modal-footer"></div>
-									<p>Footer</p>
+								</div>
 							</div>
-						</div>
-					</div>
+						</td>
 						<td><button class="btn btn-warning">交易</button></td>
 					</tr>
 
 					
+					
 				</tbody>
 				
 			</table>
-
-			
 
 			<script>
 				$(document).ready(function(){
@@ -89,10 +89,11 @@
 					
 					$("#myBody tr").filter(function(){
 						$(this).toggle($(this).text().indexOf(value) >-1)
+						});
 					});
 				});
-				});
 			</script>
+
         </div>             	
 		<br />
 		<br />

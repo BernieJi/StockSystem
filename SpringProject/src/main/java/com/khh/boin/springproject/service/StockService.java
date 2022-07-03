@@ -40,8 +40,6 @@ public class StockService {
 		return stockRepository.saveAll(stocks);
 	}
 	
-	List<Stock> stocks = new CopyOnWriteArrayList();
-	
 	// 根據Code查詢單檔股票
 	public Stock getByCode(String code) {
 		Optional<Stock> optStock = stockRepository.findAll().stream()

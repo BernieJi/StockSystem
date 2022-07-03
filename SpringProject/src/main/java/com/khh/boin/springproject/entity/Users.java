@@ -1,5 +1,7 @@
 package com.khh.boin.springproject.entity;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,8 +10,11 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -29,16 +34,15 @@ public class Users {
 			)
 	public Integer id;
 	
-	@Size(min = 2,max = 50,message = "{user.username.size}")
-	@NotEmpty(message = "{user.username.empty}")
 	public String username;
 	
-	@NotEmpty(message = "{user.password.empty}")
 	public String password;
 	
-	@Size(min = 2,max = 50,message = "{user.email.size}")
-	@NotEmpty(message = "{user.email.empty}")
 	public String email;
+	
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // 返回日期型態
+	@DateTimeFormat(pattern = "yyyy-MM-dd") // 接收日期類型
+	public Date userbirth;
 	
 	public String authority;
 
