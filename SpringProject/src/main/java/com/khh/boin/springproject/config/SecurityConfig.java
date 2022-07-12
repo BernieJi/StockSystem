@@ -24,10 +24,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private MyAccessDeniedHandler myAccessDeniedHandler;
 	
-//	@Bean
-//	 public UserDetailsService userDetailsServiceImpl {
-//	  return new UserDetailsServiceImpl();
-//	 }
 	
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
@@ -85,12 +81,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         	.userDetailsService(userDetailsService)
         	.tokenValiditySeconds(60 * 60 * 3); // 通常都會大於 session timeout的時間(30mins)
 	}
-	
-//	@Override
-//	public void configure(org.springframework.security.config.annotation.web.builders.WebSecurity web)
-//			throws Exception {
-//		web.ignoring().antMatchers("/images/**","/js/**","/static/**","/css/**");
-//	}
-
 
 }

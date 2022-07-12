@@ -1,6 +1,5 @@
 package com.khh.boin.springproject.entity;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,12 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -44,15 +37,24 @@ public class Users {
 	
 	public String email;
 	
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8") // 返回日期型態
-	@DateTimeFormat(pattern = "yyyy-MM-dd") // 接收日期類型
-	public Date userbirth;
-	
 	public String authority;
 	
 	@OneToMany(targetEntity = WatchList.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_customerid",referencedColumnName = "id")
 	public List<WatchList> watchlists;
+	
+	public Users() {
+
+	}
+	
+	public Users(Integer id, String username, String password, String email, String authority) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.authority = authority;
+	}
 
 	public Integer getId() {
 		return id;

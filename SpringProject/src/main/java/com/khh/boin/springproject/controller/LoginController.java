@@ -22,6 +22,7 @@ public class LoginController {
 	@Autowired
 	private UsersRepository usersRepository;
 	
+	// 登入畫面
 	@GetMapping("/loginpage")
 	public String loginpage() {
 		return "loginpage";
@@ -39,10 +40,10 @@ public class LoginController {
 		return "帳密錯誤 請按上一頁重新登入...";
 	}
 	// 註冊頁面
-	@RequestMapping("/registerform")
-	public String register() {
-		return "register";
-	}
+//	@RequestMapping("/registerform")
+//	public String register() {
+//		return "register";
+//	}
 	
 	// 註冊頁面
 	@PostMapping("/register")
@@ -53,7 +54,7 @@ public class LoginController {
 		users.setPassword(encodedPassword);
 		// 一般註冊會員authority設定為user
 		users.setAuthority("user");
-		usersRepository.saveAndFlush(users);
+		usersRepository.save(users);
 		return "redirect:./loginpage";
 	}
 		

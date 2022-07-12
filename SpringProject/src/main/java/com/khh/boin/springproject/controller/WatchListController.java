@@ -32,8 +32,9 @@ public class WatchListController {
 	@ResponseBody
 	public String addWatchList(@PathVariable("stockcode") String stockcode) {
 		Stock stock = stockService.getByCode(stockcode);
+		String stockName = stock.getName();
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		return String.format("追蹤股票代號:%s 追蹤用戶名稱:%s",stockcode,username);
+		return String.format("追蹤股票代號:%s,追蹤股票名稱:%s,追蹤用戶名稱:%s",stockcode,stockName,username);
 	}
 
 }

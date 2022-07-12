@@ -20,11 +20,11 @@
             <input type="password" name="password" placeholder="請輸入密碼">
             <input type="checkbox" name="remember-me" value="true" />remember me
             <br />
-            <a style="color:#F7DC6F" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" href="#">還不是會員？點此註冊!</a> 
+            <a style="color:#F7DC6F" type="button" data-bs-toggle="modal" data-bs-target="#registerModal" href="/register.html">還不是會員嗎？點此註冊!</a> 
             <input type="submit" value="登入">
          </form> 
          
-         <div class="modal fade" id="registerModal">
+         <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="stock" aria-hidden="true">
     		<div class="modal-dialog">
     			<div class="modal-content">
 			            <div class="modal-header">
@@ -33,12 +33,12 @@
 			            </div>
 			            <div class="modal-body">
 			            	<form action="/register" method="post">
-			            		<div class="form-group">
-						            <input type="date" name="userbirth" class="birth form-control" placeholder="請輸入生日" >						           			    
-						            <input type="email" name="email" class="email form-control" size="50" placeholder="請輸入Email" >
+			            		<div class="form-group">           			    
 						            <input type="text" name="username" class="account form-control" size="50" placeholder="請輸入帳號(八位英文字)" required>						            
-						            <input type="password" name="userpassword" class="password form-control" size="50" placeholder="請輸入密碼(五位數字)" required>
-						            <button id="register" type="submit" class="btn btn-primary">註冊</button>
+						            <input type="password" name="password" class="password form-control" size="50" placeholder="請輸入密碼(五位數字)" required>
+						            <input type="email" name="email" class="email form-control" size="50" placeholder="請輸入Email">
+									<!-- <input type="date" name="userbirth" class="birth form-control" placeholder="請輸入生日"> -->
+									<button id="register" type="submit" class="btn btn-primary">註冊</button>
 						            <!-- <script>
 						            	$(document).ready(function(){
 											$("#register").on("click",function(){
