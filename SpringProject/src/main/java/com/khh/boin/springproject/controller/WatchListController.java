@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,11 +29,11 @@ public class WatchListController {
 	private JdbcTemplate jdbcTemplate;
 	
 	@GetMapping("/index/stock/watchlist/{stockcode}")
-	public String addWatchList(@PathVariable(value="stockcode",required=true) String stockcode) {
+	@ResponseBody
+	public String addWatchList(@PathVariable("stockcode") String stockcode) {
 		Stock stock = stockService.getByCode(stockcode);
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		
-		return "redirect:../";
+		return String.format("追蹤股票代號:%s 追蹤用戶名稱:%s",stockcode,username);
 	}
 
 }

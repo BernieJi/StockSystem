@@ -31,11 +31,11 @@ public class StockController {
 	}
 	
 	// 根據code查詢單筆
-	@GetMapping("/index/stock/{code}")
-	public String stockGetByCode(@PathVariable("code") String code,Model model) {
-	Stock stock = stockService.getByCode(code);
-	model.addAttribute("stock",stock);
-	return "stock2";
-	}
+//	@GetMapping("/index/stock/{code}")
+//	public String stockGetByCode(@PathVariable("code") String code,Model model) {
+//	Stock stock = stockService.getByCode(code);
+//	model.addAttribute("stock",stock);
+//	return "stock2";
+//	}
 	
 }

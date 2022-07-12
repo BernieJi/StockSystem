@@ -1,11 +1,15 @@
 package com.khh.boin.springproject.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -45,6 +49,10 @@ public class Users {
 	public Date userbirth;
 	
 	public String authority;
+	
+	@OneToMany(targetEntity = WatchList.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_customerid",referencedColumnName = "id")
+	public List<WatchList> watchlists;
 
 	public Integer getId() {
 		return id;
