@@ -54,7 +54,7 @@
 			
 			<div class="container-middle">
 				<div class="container-fluid">
-					<p th:text="*{ username} + ' ' + 您好！歡迎回來金融理財系統">name</p>
+					<p th:text="您好！歡迎回來金融理財系統">name</p>
 					<h5>登入資訊：</h5>
 					<ul>
 						<li>登入帳號：<span sec:authentication="principal.username"></span></li>
@@ -66,7 +66,7 @@
 					<br />
 					<br />
 					<div>
-						<h4>修改個人資訊</h4>
+						<!-- <h4>修改個人資訊</h4>
 						<table class="pure-table pure-table-bordered">
 							<thead>
 								<tr>
@@ -84,7 +84,7 @@
 									<td><button class="btn btn-success">編輯</button></td>
 								</tr>
 							</tbody>
-						</table>
+						</table> -->
 
 					</div>
 						
