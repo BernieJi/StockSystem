@@ -34,10 +34,10 @@
 	    					<a href="/index/stock">股票 <i class="fa-solid fa-arrow-trend-up"></i></a>
 	    				</li>
 	    				<li>
-	    					<a href="#">交易系統 <i class="fa-brands fa-bitcoin"></i></a>
+	    					<a href="#">交易系統 <i class="fa-brands fa-bitcoin	"></i></a>
 	    				</li>
 	    				<li>
-	    					<a href="#">個人追蹤列表 <i class="fa-solid fa-wallet"></i></a>
+	    					<a href="/index/watchlist">個人追蹤列表 <i class="fa-solid fa-wallet"></i></a>
 	    				</li>
 	    				<li>
 	    					<a href="/index/information">修改個人資料 <i class="fa-solid fa-gear"></i></a>
@@ -99,16 +99,17 @@
 	        <div class="container-right">
 	        	<fieldset class="tracking-cloumn">
 	        		<legend>追蹤列表</legend>
-	        			<table class="pure-table pure-table-bordered">
+	        			<table class="pure-table pure-table-bordered" th:object="${ watchLists}">
 							<tr>
-								<th>項目</th>
+								<th>股票代號</th>
+								<th>股票名稱</th>
 								<th>當前價格</th>
 							</tr>
-							<tr>
-								<td>123</td>
-								<td>456</td>
+							<tr th:each="watchList,stat: ${watchLists}">
+								<td th:text="${watchList.Code}">123</td>
+								<td th:text="${watchList.Name}">456</td>
+								<td th:text="${watchList.ClosingPrice}">789</td>
 							</tr>		
-						
 						</table>
 	        	</fieldset>
 	        </div>     

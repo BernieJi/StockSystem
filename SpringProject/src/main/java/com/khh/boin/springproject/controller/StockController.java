@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.khh.boin.springproject.entity.Stock;
 import com.khh.boin.springproject.entity.Users;
@@ -22,6 +23,7 @@ public class StockController {
 	@Autowired
 	private StockService stockService;
 	
+	// 列出所有股票資訊
 	@GetMapping("/index/stock")
 	public String stockQuery(@ModelAttribute Stock stock,Users users,Model model) {
 	List<Stock> stocks = stockRepository.findAll();
@@ -30,12 +32,12 @@ public class StockController {
 	return "stock";
 	}
 	
-	// 根據code查詢單筆
-//	@GetMapping("/index/stock/{code}")
-//	public String stockGetByCode(@PathVariable("code") String code,Model model) {
-//	Stock stock = stockService.getByCode(code);
-//	model.addAttribute("stock",stock);
-//	return "stock2";
-//	}
+	// 根據stockcode查詢單筆詳細資料
+	@RequestMapping("/index/stock/info/{stockcode}")
+	public String stockInfo(@PathVariable("stockcode") String stockcode,Model model) {
+		Stock stock = stockRepository.getById(stockcode);
+		model.addAttribute("stock",stock);
+		return "stockInfo";
+	}
 	
 }

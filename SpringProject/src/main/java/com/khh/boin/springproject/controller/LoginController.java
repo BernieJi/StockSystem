@@ -31,6 +31,7 @@ public class LoginController {
 	@RequestMapping("/index")
 	public String index(@ModelAttribute Users users,Model model) {
 		model.addAttribute("users",users);
+		model.addAttribute("watchLists",users.watchlists);
 		return "index";
 	}
 	// 登入失敗
