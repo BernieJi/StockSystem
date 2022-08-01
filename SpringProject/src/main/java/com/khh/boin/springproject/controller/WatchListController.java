@@ -42,8 +42,9 @@ public class WatchListController {
 		Stock stock = stockService.getByCode(stockcode);
 		String stockName = stock.getName();
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Users users = usersRepository.getByUsername(username);
 		WatchList watchList = new WatchList();
-		watchList.setUsers(usersRepository.getByUsername(username));
+		watchList.setUsers(users);
 		watchList.setCode(stockcode);
 		watchList.setName(stock.Name);
 		watchList.setOpeningPrice(stock.OpeningPrice);
@@ -58,9 +59,10 @@ public class WatchListController {
 	public String watchList(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		List<WatchList> watchList = users.watchlists;
+		WatchList watchList = new WatchList();
+		watchList.setUsers(users);
 		model.addAttribute("users",users);
-		model.addAttribute("watchList",watchList);
+		model.addAttribute("watchlist",watchList);
 		System.out.println(watchList);
 		return "watchlist";
 	}

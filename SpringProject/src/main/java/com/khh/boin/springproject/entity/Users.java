@@ -3,6 +3,7 @@ package com.khh.boin.springproject.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +16,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 public class Users {
 	
 	@Id
@@ -31,17 +30,22 @@ public class Users {
 			)
 	public Integer id;
 	
+	@Column
 	public String username;
 	
+	@Column
 	public String password;
 	
+	@Column
 	public String email;
 	
+	@Column
 	public String authority;
 	
-	@OneToMany(targetEntity = WatchList.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_customerid",referencedColumnName = "id")
-	public List<WatchList> watchlists;
+//	@Column
+//	@OneToMany(targetEntity = WatchList.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "fk_customerid",referencedColumnName = "id")
+//	public List<WatchList> watchlists;
 	
 	public Users() {
 
@@ -95,6 +99,15 @@ public class Users {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
+	
+	
+//	public List<WatchList> getWatchlists() {
+//		return watchlists;
+//	}
+//
+//	public void setWatchlists(List<WatchList> watchlists) {
+//		this.watchlists = watchlists;
+//	}
 
 	@Override
 	public String toString() {

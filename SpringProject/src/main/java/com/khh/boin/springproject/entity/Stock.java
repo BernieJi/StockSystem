@@ -32,6 +32,7 @@ public class Stock {
 	    public String LowestPrice;
 	    
 	    public String ClosingPrice;
+	    
 	    @ManyToMany(mappedBy = "stocks")
 	    public List<WatchList> watchLists;
 	    
