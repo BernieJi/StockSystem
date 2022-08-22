@@ -7,10 +7,13 @@
 		<link rel="stylesheet" href="https://unpkg.com/purecss@2.1.0/build/pure-min.css">
         <!-- 導入JQuery -->
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<!-- 導入FontAwesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     </head>
 
     <body> 	
     	<div th:object="${ usersz}" style="position:relative;top:50px;left:260px">
+			<a href="/index">上一頁回首頁 <i class="fa-solid fa-house-chimney"></i></a>
 			<table class="pure-table pure-table-bordered">
 				<thead>
 					<tr>

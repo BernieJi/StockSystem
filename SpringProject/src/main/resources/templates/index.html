@@ -18,7 +18,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     </head>
 
-    <body th:object="${ users}">
+    <body>
     	<div class="container-all">
 	    	<div class="container-left">
 	    		<nav id="sidebar">
@@ -32,9 +32,6 @@
 	    				</li>
 	    				<li>
 	    					<a href="/index/stock">股票 <i class="fa-solid fa-arrow-trend-up"></i></a>
-	    				</li>
-	    				<li>
-	    					<a href="#">交易系統 <i class="fa-brands fa-bitcoin	"></i></a>
 	    				</li>
 	    				<li>
 	    					<a href="/index/watchlist">個人追蹤列表 <i class="fa-solid fa-wallet"></i></a>
@@ -61,65 +58,26 @@
 						<li>權限：<span sec:authentication="authorities"></span></li>
 						<li>客戶端地址：<span sec:authentication="details.remoteAddress"></span></li>
 						<li>Session Id:<span sec:authentication="details.sessionId"></span></li>
-						<li>登入時間：<span id="time"></span></li>
-					</ul>
-					<br />
-					<br />
-					<div>
-						<!-- <h4>修改個人資訊</h4>
-						<table class="pure-table pure-table-bordered">
-							<thead>
-								<tr>
-									<th>使用者帳號</th>
-									<th>使用者密碼</th>
-									<th>使用者Email</th>
-									<th>編輯</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td th:text="*{ username}">使用者帳號</td>
-									<td th:text="*{ password}">使用者密碼</td>
-									<td th:text="*{email}">使用者信箱</td>
-									<td><button class="btn btn-success">編輯</button></td>
-								</tr>
-							</tbody>
-						</table> -->
+						<li>現在時間：<span id="time"></span></li>
 
-					</div>
-						
+						<script type="text/javascript">
+							var loginDate = new Date();
+							var loginTime = loginDate.toLocaleString();
+							document.getElementById('time').innerHTML=loginTime
+						</script>
+					</ul>
+											
 					<script type="text/javascript">
 						var loginDate = new Date();
 						var loginTime = loginDate.toLocaleString();
 						document.getElementById('time').innerHTML=loginTime
 					</script>
-	        	</div>
-	        </div> 
-	        
-	        <div class="container-right">
-	        	<fieldset class="tracking-cloumn">
-	        		<legend>追蹤列表</legend>
-	        			<table class="pure-table pure-table-bordered" th:object="${ watchLists}">
-							<tr>
-								<th>股票代號</th>
-								<th>股票名稱</th>
-								<th>當前價格</th>
-							</tr>
-							<tr th:each="watchList,stat: ${watchLists}">
-								<td th:text="${watchList.Code}">123</td>
-								<td th:text="${watchList.Name}">456</td>
-								<td th:text="${watchList.ClosingPrice}">789</td>
-							</tr>		
-						</table>
-	        	</fieldset>
+	        </div>
+		</div> 
+
+			<div class="container-right" >
+	        	<img style="width:500px;height:500px" src="images/index.jpg">
 	        </div>     
-        </div>
-        <!-- <button sec:authorize="hasAuthority('admin')">管理按鈕</button>  --> 
-       	
-     
-       	<footer>
-			<br/>
-    		<center> © Financial System 2022/06/06 0912-345-678</center>
-  		</footer>
+
     </body>
 </html>

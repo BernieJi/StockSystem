@@ -69,6 +69,12 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<dependency>
+			<groupId>com.yahoofinance-api</groupId>
+			<artifactId>YahooFinanceAPI</artifactId>
+			<version>3.17.0</version>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
 		<dependency>
 		    <groupId>com.github.javafaker</groupId>

@@ -17,7 +17,7 @@
 			<a href="/index">按此回到首頁 <i class="fa-solid fa-house"></i></a>
 		</div>
 		
-		<div th:object="${ watchList}" style="position:fixed;top:50px;left:260px">
+		<div th:object="${ watchlists}" style="position:fixed;top:50px;left:260px">
 			<h1>追蹤個股資訊</h1>
 			<table class="pure-table pure-table-bordered">
 				<thead>
@@ -29,7 +29,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="watch,stat: ${ watchList}">
+					<tr th:each="watch,stat: ${ watchlists}">
 						<td th:text="${watch.Code}"></td>
 						<td th:text="${watch.Name}"></td>
 						<td th:text="${watch.ClosingPrice}"></td>
