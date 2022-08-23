@@ -1,9 +1,12 @@
 package com.khh.boin.springproject.controller;
 
+import java.sql.ResultSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -59,11 +62,22 @@ public class WatchListController {
 	public String watchList(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		WatchList watchList = new WatchList();
-		watchList.setUsers(users);
+		Integer number = users.getId();
+		String sql = "select * from watch_list where fk_customerid=?";
+		List<WatchList> watchlists = jdbcTemplate.query(sql,
+				(ResultSet rs, int rowNum)->{
+					WatchList watchList = new WatchList();
+					watchList.setWid(rs.getInt("wid"));
+					watchList.setClosingPrice(rs.getString("closing_price"));
+					watchList.setCode(rs.getString("code"));
+					watchList.setHighestPrice(rs.getString("highest_price"));
+					watchList.setLowestPrice(rs.getString("lowest_price"));
+					watchList.setName(rs.getString("name"));
+					watchList.setOpeningPrice(rs.getString("opening_price"));
+					return watchList;
+				},number);
 		model.addAttribute("users",users);
-		model.addAttribute("watchlist",watchList);
-		System.out.println(watchList);
+		model.addAttribute("watchlists",watchlists);
 		return "watchlist";
 	}
 
