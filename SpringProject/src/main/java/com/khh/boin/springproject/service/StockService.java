@@ -31,7 +31,7 @@ public class StockService {
 	public Iterable<Stock> list(){
 		return stockRepository.findAll();
 	}
-	
+	// 儲存stock資訊
 	public Stock save(Stock stock) {
 		return stockRepository.save(stock);
 	}
@@ -47,8 +47,6 @@ public class StockService {
 				.findFirst();
 		return optStock.isPresent()?optStock.get():null;
 	}
-	
-	// 將單檔股票存入追蹤名單
 
 	
 }

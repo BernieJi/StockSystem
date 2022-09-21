@@ -1,6 +1,9 @@
 package com.khh.boin.springproject.entity;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -20,53 +25,26 @@ import javax.persistence.Table;
 public class WatchList {
 
 	@Id
-	@SequenceGenerator(
-			name="watch_list_sequence",
-			sequenceName = "watch_list_sequence",
-			allocationSize = 1
-			)
-	@GeneratedValue(
-			strategy = GenerationType.SEQUENCE,
-			generator = "watch_list_sequence"
-			)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Integer wid;
 	
-	@ManyToOne(targetEntity = Users.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_customerid")
+	@OneToOne(mappedBy = "watchlist")
 	public Users users;
-    
-	public String Code;
- 	
-    public String Name;
-    
-    public String OpeningPrice;
-    
-    public String HighestPrice;
-    
-    public String LowestPrice;
-    
-    public String ClosingPrice;
-    
-    @ManyToMany
-    @JoinTable(name="stock_watchList",
-    	joinColumns = {@JoinColumn(name="watchList_id",referencedColumnName = "wid")},
-    	inverseJoinColumns = {@JoinColumn(name="stock_id",referencedColumnName = "code")})
-    public List<Stock> stocks;
-    
-    public WatchList() {
+	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="watchlist_stock",
+				joinColumns = {@JoinColumn(name="watchList_id",referencedColumnName = "wid")},
+				inverseJoinColumns = {@JoinColumn(name="stock_id",referencedColumnName = "Code")})
+    public Set<Stock> stocks = new HashSet<>();
+	
+	public WatchList() {
 		
 	}
-    
-	public WatchList(Integer wid, Users users, String code, String name, String openingPrice, String highestPrice,
-			String lowestPrice, String closingPrice, List<Stock> stocks) {
+
+	public WatchList(Integer wid, Users users, Set<Stock> stocks) {
+		super();
 		this.wid = wid;
 		this.users = users;
-		Code = code;
-		Name = name;
-		OpeningPrice = openingPrice;
-		HighestPrice = highestPrice;
-		LowestPrice = lowestPrice;
-		ClosingPrice = closingPrice;
 		this.stocks = stocks;
 	}
 
@@ -88,70 +66,20 @@ public class WatchList {
 		this.users = users;
 	}
 
-	public String getCode() {
-		return Code;
-	}
-
-	public void setCode(String code) {
-		Code = code;
-	}
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-
-	public String getOpeningPrice() {
-		return OpeningPrice;
-	}
-
-	public void setOpeningPrice(String openingPrice) {
-		OpeningPrice = openingPrice;
-	}
-
-	public String getHighestPrice() {
-		return HighestPrice;
-	}
-
-	public void setHighestPrice(String highestPrice) {
-		HighestPrice = highestPrice;
-	}
-
-	public String getLowestPrice() {
-		return LowestPrice;
-	}
-
-	public void setLowestPrice(String lowestPrice) {
-		LowestPrice = lowestPrice;
-	}
-
-	public String getClosingPrice() {
-		return ClosingPrice;
-	}
-
-	public void setClosingPrice(String closingPrice) {
-		ClosingPrice = closingPrice;
-	}
-
-	public List<Stock> getStocks() {
+	public Set<Stock> getStocks() {
 		return stocks;
 	}
 
-	public void setStocks(List<Stock> stocks) {
+	public void setStocks(Set<Stock> stocks) {
 		this.stocks = stocks;
 	}
 
 	@Override
 	public String toString() {
-		return "WatchList [wid=" + wid + ", users=" + users + ", Code=" + Code + ", Name=" + Name + ", OpeningPrice="
-				+ OpeningPrice + ", HighestPrice=" + HighestPrice + ", LowestPrice=" + LowestPrice + ", ClosingPrice="
-				+ ClosingPrice + ", stocks=" + stocks + "]";
+		return "WatchList [wid=" + wid + ", users=" + users + ", stocks=" + stocks + "]";
 	}
-    
 	
 	
+
     
 }

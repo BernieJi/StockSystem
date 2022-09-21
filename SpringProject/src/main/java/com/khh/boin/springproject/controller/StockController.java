@@ -32,7 +32,7 @@ public class StockController {
 	return "stock";
 	}
 	
-	// 根據stockcode查詢單筆詳細資料
+	// 根據stockcode查詢單筆資料
 	@RequestMapping("/index/stock/info/{stockcode}")
 	public String stockInfo(@PathVariable("stockcode") String stockcode,Model model) {
 		Stock stock = stockRepository.getById(stockcode);

@@ -17,23 +17,31 @@
 			<a href="/index">按此回到首頁 <i class="fa-solid fa-house"></i></a>
 		</div>
 		
-		<div th:object="${ watchlists}" style="position:fixed;top:50px;left:260px">
+		<div th:object="${ stocks}" style="position:fixed;top:50px;left:260px">
 			<h1>追蹤個股資訊</h1>
 			<table class="pure-table pure-table-bordered">
 				<thead>
 					<tr>
-						<th>各股代號</th>
-						<th>各股名稱</th>
-						<th>個股收盤價</th>
-						<th>移除追蹤清單</th>
+						<th>股票代號</th>
+						<th>股票名稱</th>
+						<th>交易數量</th>
+						<th>股票開盤價</th>
+						<th>股票收盤價</th>
+						<th>當日最高價</th>
+						<th>當日最低價</th>
+						<th>取消自選</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="watch,stat: ${ watchlists}">
-						<td th:text="${watch.Code}"></td>
-						<td th:text="${watch.Name}"></td>
-						<td th:text="${watch.ClosingPrice}"></td>
-						<td><button class="btn btn-danger">編輯</button></td>
+					<tr th:each="stock,stat: ${ stocks}">
+						<td th:text="${stock.Code}"></td>
+						<td th:text="${stock.Name}"></td>
+						<td th:text="${stock.TradeVolume}"></td>
+						<td th:text="${stock.OpeningPrice}"></td>
+						<td th:text="${stock.ClosingPrice}"></td>
+						<td th:text="${stock.HighestPrice}"></td>
+						<td th:text="${stock.LowestPrice}"></td>
+						<td><button class="btn btn-danger">移除追蹤</button></td>
 					</tr>
 				</tbody>
 			</table>

@@ -19,6 +19,12 @@ public class UsersService {
 		return usersRepository.findAll();
 	}
 	
+	// 新增用戶資料
+	public Boolean saveUsers(Integer id,Users users) {
+		usersRepository.save(users);
+		return true;
+	}
+	
 	// 修改用戶資料
 	public Boolean updateUsers(Integer id,Users users) {
 		usersRepository.save(users);

@@ -1,13 +1,17 @@
 package com.khh.boin.springproject.entity;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -33,14 +37,14 @@ public class Stock {
 	    
 	    public String ClosingPrice;
 	    
-	    @ManyToMany(mappedBy = "stocks")
-	    public List<WatchList> watchLists;
-	    
 	    @Column(name="stock_change")
 	    public String Change;
 	    
 	    @Column(name="stock_transaction")
 	    public String Transaction;
+	    
+	    @ManyToMany(mappedBy = "stocks")
+	    public Set<WatchList> watchList = new HashSet<>();
 
 		public String getCode() {
 			return Code;
@@ -122,13 +126,22 @@ public class Stock {
 			Transaction = transaction;
 		}
 
+		public Set<WatchList> getWatchList() {
+			return watchList;
+		}
+
+		public void setWatchList(Set<WatchList> watchList) {
+			this.watchList = watchList;
+		}
+
 		@Override
 		public String toString() {
 			return "Stock [Code=" + Code + ", Name=" + Name + ", TradeVolume=" + TradeVolume + ", TradeValue="
 					+ TradeValue + ", OpeningPrice=" + OpeningPrice + ", HighestPrice=" + HighestPrice
 					+ ", LowestPrice=" + LowestPrice + ", ClosingPrice=" + ClosingPrice + ", Change=" + Change
-					+ ", Transaction=" + Transaction + "]";
+					+ ", Transaction=" + Transaction + ", watchList=" + watchList + "]";
 		}
+	    
 	    
 	    
 	    

@@ -37,15 +37,14 @@
 						<th>股票收盤價</th>
 						<th>當日最高價</th>
 						<th>當日最低價</th>
-						<th>詳細資訊</th>
-						<th>交易</th>		
+						<th>詳細資訊</th>		
 					</tr>
 				</thead>
 
 				<tbody id="myBody">
 					<tr th:each="stock,stat: ${stocks}">
 						<td th:text="${stat.count}"></td>
-						<td th:text="${stock.Code}"></td>
+						<td th:text="${stock.Code}" id="myCode"></td>
 						<td th:text="${stock.Name}"></td>
 						<td th:text="${stock.TradeVolume}"></td>
 						<td th:text="${stock.OpeningPrice}"></td>
@@ -54,45 +53,9 @@
 						<td th:text="${stock.LowestPrice}"></td>
 						<td>
 							<a type="button" th:href="@{/index/stock/info/{stockcode}(stockcode=${stock.Code})}">詳細資訊</a>
-							<!-- <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#stockInfo">詳細資訊</button> -->
+						</td>
 						
-							<!-- <button class="btn btn-info" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content-id="popover-content" tabindex="0" role="button">
-								詳細資訊
-							</button>
-							  
-							<div id="popover-content" class="d-none">
-								<p th:text="${stock.Code}">股票代號</p>
-								<p th:text="${stock.Name}">股票名稱</p>
-							</div> -->
-
-							<!-- <div class="modal fade" id="stockInfo" tabindex="-1" aria-labelledby="stock" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										
-										<div class="modal-header">
-											<h4>股票詳細資訊</h4>
-											<a type="button" th:href="@{/index/stock/watchlist/{stockcode}(stockcode=${stock.Code})}"><i class="fa-solid fa-circle-plus"></i></a>
-											<button class="btn-close" data-bs-dismiss="modal"></button>
-										</div>
-										
-										<div class="modal-body">
-										<p th:text="${stock.Code}">股票代號</p>
-										<p th:text="${stock.Name}">股票名稱</p>
-										</div>
-										
-										<div class="modal-footer">
-										<p>Footer</p>
-										</div>
-									</div>
-								</div>
-							</div>  -->
-						</td>				
-									
-						<td><button class="btn btn-warning">交易</button></td>
-					</tr>
-
-					
-					
+					</tr>	
 				</tbody>
 				
 			</table>

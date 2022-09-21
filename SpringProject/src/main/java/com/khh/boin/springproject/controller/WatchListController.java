@@ -1,7 +1,10 @@
 package com.khh.boin.springproject.controller;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.khh.boin.springproject.entity.Stock;
 import com.khh.boin.springproject.entity.Users;
 import com.khh.boin.springproject.entity.WatchList;
+import com.khh.boin.springproject.repository.StockRepository;
 import com.khh.boin.springproject.repository.UsersRepository;
 import com.khh.boin.springproject.repository.WatchListRepository;
 import com.khh.boin.springproject.service.StockService;
@@ -36,48 +40,35 @@ public class WatchListController {
 	private WatchListRepository watchListRepository;
 	@Autowired
 	private StockService stockService;
-	@Autowired
-	private JdbcTemplate jdbcTemplate;
 	
+	// 個股加入追蹤清單頁面
 	@GetMapping("/index/stock/watchlist/{stockcode}")
-	@ResponseBody
-	public WatchList addWatchList(@PathVariable("stockcode") String stockcode) {
+	public String addWatchList(@PathVariable("stockcode") String stockcode) {
 		Stock stock = stockService.getByCode(stockcode);
-		String stockName = stock.getName();
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		WatchList watchList = new WatchList();
-		watchList.setUsers(users);
-		watchList.setCode(stockcode);
-		watchList.setName(stock.Name);
-		watchList.setOpeningPrice(stock.OpeningPrice);
-		watchList.setHighestPrice(stock.HighestPrice);
-		watchList.setLowestPrice(stock.LowestPrice);
-		watchList.setClosingPrice(stock.ClosingPrice);
-		watchListRepository.save(watchList);
-		return watchList;
+		WatchList watchList = users.getWatchlist();
+		if(watchList != null) {
+			watchList.getStocks().add(stock);
+		} 
+		else {
+		watchList = new WatchList();
+		users.setWatchlist(watchList);
+		watchList.getStocks().add(stock);
+		}
+		usersRepository.save(users);
+		return "redirect:../";
 	}
 	
+	// 個人追蹤清單頁面
 	@GetMapping("/index/watchlist")
 	public String watchList(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		Integer number = users.getId();
-		String sql = "select * from watch_list where fk_customerid=?";
-		List<WatchList> watchlists = jdbcTemplate.query(sql,
-				(ResultSet rs, int rowNum)->{
-					WatchList watchList = new WatchList();
-					watchList.setWid(rs.getInt("wid"));
-					watchList.setClosingPrice(rs.getString("closing_price"));
-					watchList.setCode(rs.getString("code"));
-					watchList.setHighestPrice(rs.getString("highest_price"));
-					watchList.setLowestPrice(rs.getString("lowest_price"));
-					watchList.setName(rs.getString("name"));
-					watchList.setOpeningPrice(rs.getString("opening_price"));
-					return watchList;
-				},number);
+		WatchList watchList = users.getWatchlist();
+		Set<Stock> stocks = watchList.getStocks();
 		model.addAttribute("users",users);
-		model.addAttribute("watchlists",watchlists);
+		model.addAttribute("stocks",stocks);
 		return "watchlist";
 	}
 
