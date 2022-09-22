@@ -71,5 +71,16 @@ public class WatchListController {
 		model.addAttribute("stocks",stocks);
 		return "watchlist";
 	}
+	
+	// 從個人追蹤清單頁面移除股票
+	@GetMapping("/index/watchlist/delete/{stockcode}")
+	public String watchList(@PathVariable("stockcode")String stockcode) {
+		Stock stock = stockService.getByCode(stockcode);
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Users users = usersRepository.getByUsername(username);
+		WatchList watchList = users.getWatchlist();
+		users.getWatchlist().stocks.remove(stock);
+		return "redirect:../";
+	}
 
 }
