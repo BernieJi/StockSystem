@@ -45,7 +45,7 @@ public class Users {
 	public String authority;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_watchListId",unique = true)
+	@JoinColumn(name = "fk_watchListId",referencedColumnName = "wid",unique = true)
 	public WatchList watchlist;
 	
 	public Users() {

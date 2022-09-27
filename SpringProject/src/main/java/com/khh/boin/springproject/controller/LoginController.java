@@ -30,6 +30,7 @@ public class LoginController {
 	public String loginpage() {
 		return "loginpage";
 	}
+	
 	// 登入成功
 	@RequestMapping("/index")
 	public String index(@ModelAttribute Users users,Model model) {

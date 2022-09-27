@@ -41,8 +41,9 @@
 						<td th:text="${stock.ClosingPrice}"></td>
 						<td th:text="${stock.HighestPrice}"></td>
 						<td th:text="${stock.LowestPrice}"></td>
-						<td><a type="button" th:href="@{/index/watchlist/delete/{stockcode}(stockcode=${stock.Code})}" style="text-decoration:none; border:2px,solid,black"></a>移除追蹤</td>
-						<!-- <td><button class="btn btn-danger">移除追蹤</button></td> -->
+						<td>
+							<a type="button" th:href="@{/index/watchlist/delete/{stockcode}(stockcode=${stock.Code})}" style="text-decoration:none; border:2px,solid,black">移除追蹤</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>

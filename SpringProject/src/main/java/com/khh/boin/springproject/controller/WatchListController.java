@@ -79,7 +79,8 @@ public class WatchListController {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
 		WatchList watchList = users.getWatchlist();
-		users.getWatchlist().stocks.remove(stock);
+		users.getWatchlist().getStocks().remove(stock);
+		usersRepository.save(users);
 		return "redirect:../";
 	}
 
