@@ -33,10 +33,20 @@ public class AdminController {
 		return "adminpage";
 		}
 	
-	// 刪除用戶
+	// 給予使用者"管理員"權限
+	@RequestMapping("/index/adminpage/admin/{usersid}")
+	public String authorizeAdmin(@PathVariable("usersid") Integer id){
+		Users users = usersRepository.getById(id);
+		users.setAuthority("users,admin");
+		usersRepository.save(users);
+		return "redirect:../";
+		}
+	
+	// 刪除使用者
 	@RequestMapping("/index/adminpage/delete")
 	public String delete(@RequestParam(value="id") Integer id){
-		usersService.deleteUsers(id);
+		Users users = usersRepository.getById(id);
+		usersRepository.delete(users);
 		return "redirect:./";
 		}
 }

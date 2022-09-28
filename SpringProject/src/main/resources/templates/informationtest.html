@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.themeleaf.org">
+    <head>
+        <title>User InformationTest</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- 導入JQuery -->
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+       	<!-- 導入Vue -->
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+		<!-- 導入FontAwesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+	</head>
+
+    <body>
+		<div style="position:fixed;left:260px">
+			<a href="/index">按此回到首頁 <i class="fa-solid fa-house"></i></a>
+		</div>
+		
+		<div id="app" style="position:fixed;top:50px;left:260px">
+			<h1>修改個人資訊</h1>
+			<table class="pure-table pure-table-bordered">
+				<thead>
+					<tr>
+						<th>test</th>
+						<th>username</th>
+						<th>password</th>
+						<th>email</th>
+						<th>編輯</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{5*100}}</td>
+						<td>{{result.username}}</td>
+						<td>{{result.password}}</td>
+						<td>{{result.email}}</td>
+						<td><button class="btn btn-success">編輯</button></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+		
+		<script type="text/javascript">
+			Vue.config.productionTip = false;
+			var app = new Vue(
+				{
+					el:'#app',
+					data:{
+						username:'boin',
+						result:{id:'',username:'',password:'',email:'',authority:'',watchlist:''}
+					},
+					methods:{
+						query:function(){
+							var serviceURL = '/usersinfo/rawdata/'+ this.username ;
+							$.ajax({
+								url:serviceURL,
+								type:'GET',
+								success:function(data,status,xhr){
+									console.log(data);
+									app.result = data;
+								},
+								error:function(xhr,data,status){
+									console.log(123);
+								}
+							});
+						}
+					}
+				}
+			);
+		</script>
+     
+    </body>
+</html>

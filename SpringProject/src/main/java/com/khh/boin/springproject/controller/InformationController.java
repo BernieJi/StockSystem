@@ -18,10 +18,10 @@ public class InformationController {
 		
 	@RequestMapping("index/information")
 	public String updateInformation(Model model) {
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Users users = usersRepository.getByUsername(username);
-		model.addAttribute("users",users);
-		return "information";
+//		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+//		Users users = usersRepository.getByUsername(username);
+//		model.addAttribute("users",users);
+		return "informationtest";
 	}
 	
 

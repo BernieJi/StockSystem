@@ -22,7 +22,7 @@
 						<th>username</th>
 						<th>email</th>
 						<th>權限</th>
-						<th>編輯</th>
+						<th>賦予管理者權限</th>
 						<th>刪除</th>		
 					</tr>
 				</thead>
@@ -32,10 +32,9 @@
 						<td th:text="${users.username}">帳戶名稱</td>
 						<td th:text="${users.email}">Email</td>
 						<td th:text="${users.authority}">權限</td>
-						<td><button class="btn btn-success">編輯資訊</button></td>
+						<td><a type="button" th:href="@{/index/adminpage/admin/{usersid}(usersid=${users.id})}" style="text-decoration:none; border:2px,solid,black">給予admin權限</a></td>
 						<td><a type="button" th:href="@{/index/adminpage/delete(id=${users.id})}" style="text-decoration:none; border:2px,solid,black">刪除用戶</a></td>
-						<!-- <td><button class="btn btn-warning">刪除用戶</button></td> -->
-
+						
 					</tr>
 				</tbody>
 			</table>  
