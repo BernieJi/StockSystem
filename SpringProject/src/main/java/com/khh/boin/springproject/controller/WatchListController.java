@@ -1,36 +1,20 @@
 package com.khh.boin.springproject.controller;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.khh.boin.springproject.entity.Stock;
 import com.khh.boin.springproject.entity.Users;
 import com.khh.boin.springproject.entity.WatchList;
-import com.khh.boin.springproject.repository.StockRepository;
 import com.khh.boin.springproject.repository.UsersRepository;
 import com.khh.boin.springproject.repository.WatchListRepository;
 import com.khh.boin.springproject.service.StockService;
-import com.khh.boin.springproject.service.UserDetailsServiceImpl;
-
 
 @Controller
 public class WatchListController {
@@ -47,16 +31,16 @@ public class WatchListController {
 		Stock stock = stockService.getByCode(stockcode);
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		WatchList watchList = users.getWatchlist();
+		WatchList watchList = watchListRepository.getByUsersId(users.getId());
 		if(watchList != null) {
 			watchList.getStocks().add(stock);
 		} 
 		else {
 		watchList = new WatchList();
-		users.setWatchlist(watchList);
+		watchList.setUsers(users);
 		watchList.getStocks().add(stock);
 		}
-		usersRepository.save(users);
+		watchListRepository.save(watchList);
 		return "redirect:../";
 	}
 	
@@ -65,7 +49,7 @@ public class WatchListController {
 	public String watchList(Model model) {
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		WatchList watchList = users.getWatchlist();
+		WatchList watchList = watchListRepository.getByUsersId(users.getId());
 		Set<Stock> stocks = watchList.getStocks();
 		model.addAttribute("users",users);
 		model.addAttribute("stocks",stocks);
@@ -78,9 +62,9 @@ public class WatchListController {
 		Stock stock = stockService.getByCode(stockcode);
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
-		WatchList watchList = users.getWatchlist();
-		users.getWatchlist().getStocks().remove(stock);
-		usersRepository.save(users);
+		WatchList watchList = watchListRepository.getByUsersId(users.getId());
+		watchList.getStocks().remove(stock);
+		watchListRepository.save(watchList);
 		return "redirect:../";
 	}
 

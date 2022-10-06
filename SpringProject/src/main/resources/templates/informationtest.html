@@ -4,10 +4,10 @@
         <title>User InformationTest</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- 導入JQuery -->
-    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-       	<!-- 導入Vue -->
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+		<!-- 導入Axios -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.js"></script>
+		<!-- 導入Vue -->
+		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 		<!-- 導入FontAwesome -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 	</head>
@@ -19,55 +19,95 @@
 		
 		<div id="app" style="position:fixed;top:50px;left:260px">
 			<h1>修改個人資訊</h1>
+			<input type="text" v-model="username1" placeholder="請輸入自己的使用者名稱">
+			<button @click="query">查詢</button>
 			<table class="pure-table pure-table-bordered">
 				<thead>
 					<tr>
-						<th>test</th>
 						<th>username</th>
-						<th>password</th>
 						<th>email</th>
 						<th>編輯</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>{{5*100}}</td>
-						<td>{{result.username}}</td>
-						<td>{{result.password}}</td>
-						<td>{{result.email}}</td>
-						<td><button class="btn btn-success">編輯</button></td>
+						<td><input type="text" v-model="result.username"></td>
+						<td><input type="text" v-model="result.email"></td>
+						<td><button @click="update">保存編輯</button></td>
 					</tr>
 				</tbody>
 			</table>
         </div>
 		
 		<script type="text/javascript">
-			Vue.config.productionTip = false;
-			var app = new Vue(
-				{
-					el:'#app',
-					data:{
-						username:'boin',
-						result:{id:'',username:'',password:'',email:'',authority:'',watchlist:''}
-					},
-					methods:{
-						query:function(){
-							var serviceURL = '/usersinfo/rawdata/'+ this.username ;
-							$.ajax({
-								url:serviceURL,
-								type:'GET',
-								success:function(data,status,xhr){
-									console.log(data);
-									app.result = data;
-								},
-								error:function(xhr,data,status){
-									console.log(123);
-								}
-							});
-						}
+			Vue.createApp({
+				data: function(){
+					return {
+						username1:'',
+						result:{id:'',username:'',password:'',email:'',authority:''},
+						
 					}
+				},
+				methods :{
+					query:function(){
+						console.log("查詢使用者名稱：" + this.username1);
+						var serviceURL = '/usersinfo/rawdata/'+ this.username1;
+						axios.get(serviceURL)
+							.then((response) => {
+							console.log(response);
+							this.result = response.data;
+							}
+						)	
+					},
+
+					test(){
+						console.log(result);
+					},
+
+					update:function(){
+						var serviceURL = '/usersinfo/rawdata/'+ this.username1 +'/update';
+						axios.put(serviceURL,{
+								id:'this.$data.result.id',
+								username:'boin',
+								password:'$2a$10$NnSGxUSF5m5T8r0tzJv9Buq4HhycYl7HnTPV1ulR6uD3rmoE0Rya2',
+								email:'aaa@gmail.com',
+								authority:'user,admin'
+							})
+						.then(function (response) {
+							console.log(response);
+						})
+						.catch(function (error) {
+							console.log(error);
+						});
+
+						// axios({
+						// 	method:'put',
+						// 	url:serviceURL,
+						// 	data:{
+						// 		id:result.id,
+						// 		username:result.username,
+						// 		password:result.password,
+						// 		email:result.email,
+						// 		authority:result.authority
+						// 	}
+						// });	
+					}
+					
+				},
+				mounted	:function(){
+					// var serviceURL = '/usersinfo/rawdata/'+ this.username1;
+					// axios.get(serviceURL)
+					// .then((response) => {
+					// 	console.log(response);
+					// 	this.result = response.data;
+					// 	isShow = true;
+					// }
+					// )
+				
+					
 				}
-			);
+			}).mount('#app');
+
 		</script>
      
     </body>

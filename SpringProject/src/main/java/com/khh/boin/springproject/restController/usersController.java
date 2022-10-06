@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,12 +48,14 @@ public class usersController {
 	}
 	
 	// 修改用戶資料
-	@PutMapping("/usersinfo/rawdata/{usersid}/update")
-	public String update(@PathVariable(value="usersid") Integer id){
-		Users users = usersRepository.getById(id);
+	@PutMapping(path="/usersinfo/rawdata/{usersname}/update",consumes="application/json")
+	public String update(@PathVariable(value="usersname") String username,@RequestBody Users usersUpdate){
+		Users users = usersRepository.getByUsername(username);
+		users.setUsername(usersUpdate.getUsername());
+		users.setEmail(usersUpdate.getEmail());
 		usersRepository.save(users);
-		return "redirect:./";
-		}
+		return "update success!";
+	}
 	
 	// 刪除用戶
 	@DeleteMapping("/usersinfo/rawdata/{usersid}/delete")

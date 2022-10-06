@@ -1,22 +1,15 @@
 package com.khh.boin.springproject.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
+@Table
 @Entity
 public class Users {
 	
@@ -44,22 +37,20 @@ public class Users {
 	@Column
 	public String authority;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_watchListId",referencedColumnName = "wid",unique = true)
-	public WatchList watchlist;
+	@OneToOne(mappedBy = "users")
+	public WatchList watchList;
 	
 	public Users() {
 
 	}
 
-	public Users(Integer id, String username, String password, String email, String authority, WatchList watchlist) {
+	public Users(Integer id, String username, String password, String email, String authority) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.authority = authority;
-		this.watchlist = watchlist;
 	}
 
 	public Integer getId() {
@@ -102,18 +93,11 @@ public class Users {
 		this.authority = authority;
 	}
 
-	public WatchList getWatchlist() {
-		return watchlist;
-	}
-
-	public void setWatchlist(WatchList watchlist) {
-		this.watchlist = watchlist;
-	}
 
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
-				+ ", authority=" + authority + ", watchlist=" + watchlist + "]";
+				+ ", authority=" + authority + "]";
 	}
 	
 	
