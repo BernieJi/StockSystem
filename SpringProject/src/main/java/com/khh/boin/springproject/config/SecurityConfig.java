@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.failureForwardUrl("/fail");
 		
 		// 授權認證
-		String[] permitted = {"/loginpage","/register","/css/**","/images/**","/js/**","/usersinfo/**"};
+		String[] permitted = {"/loginpage","/register","/css/**","/images/**","/js/**","/usersinfo/**","/**"};
 		http.authorizeHttpRequests()
         // 不需要被認證的頁面：/loginpage,/registerform 與資源檔
         .antMatchers(permitted).permitAll()

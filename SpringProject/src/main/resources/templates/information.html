@@ -23,17 +23,17 @@
 				<thead>
 					<tr>
 						<th>username</th>
-						<th>password</th>
 						<th>email</th>
 						<th>編輯</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td th:text="${users.username}"></td>
-						<td th:text="${users.password}"></td>
-						<td th:text="${users.email}"></td>
-						<td><button class="btn btn-success">編輯</button></td>
+						<td><input type="text"></td>
+						<td><input type="text"></td>
+						<td>
+							<a type="button" th:href="@{index/information/update/{usersid}(usersid=${users.id})}">編輯使用者資訊</a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
