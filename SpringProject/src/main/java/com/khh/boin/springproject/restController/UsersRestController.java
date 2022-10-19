@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.khh.boin.springproject.entity.Users;
@@ -43,12 +42,13 @@ public class UsersRestController {
 		return users;	 
 	}
 	
-	// 修改用戶資料
-	@PutMapping(path="/usersinfo/rawdata/{usersname}/update",consumes="application/json")
-	public String update(@PathVariable(value="usersname") String username,@RequestBody Users usersUpdate){
+	// 根據username修改用戶資料
+	@Operation(summary = "根據username修改用戶資料")
+	@PutMapping(path="/usersinfo/rawdata/{usersname}/update")
+	public String update(@PathVariable(value="usersname") String username){
 		Users users = usersRepository.getByUsername(username);
-		users.setUsername(usersUpdate.getUsername());
-		users.setEmail(usersUpdate.getEmail());
+		// 會員資料更動?
+			
 		usersRepository.save(users);
 		return "update success!";
 	}

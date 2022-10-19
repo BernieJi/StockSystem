@@ -54,11 +54,10 @@ public class StockRestController {
 	
 	// 將此檔股票加入追蹤清單
 	// 個股加入追蹤清單頁面
-	@Operation(summary = "根據stockCode將股票加入追蹤清單")
-	@PostMapping("/stockinfo/rawdata/{stockcode}/addtowatchlist")
-	public String addToWatchList(@PathVariable("stockcode") String stockcode) {
+	@Operation(summary = "根據stockCode與username將股票加入追蹤清單")
+	@PostMapping("/stockinfo/rawdata/{stockcode}/{username}/addtowatchlist")
+	public String addToWatchList(@PathVariable("stockcode") String stockcode,@PathVariable("username")String username) {
 		Stock stock = stockRepository.getByCode(stockcode);
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Users users = usersRepository.getByUsername(username);
 		WatchList watchList = watchListRepository.getByUsersId(users.getId());
 		if(watchList != null) {
