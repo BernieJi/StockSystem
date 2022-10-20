@@ -1,5 +1,11 @@
 # StockSystem
 
+
+---可以關注自己喜歡的股票的網站---
+
+
+歡迎參觀～～～
+
 ＊＊＊＊將專案部署至Azure: ＊＊＊＊
 
 1. Create a Java app
