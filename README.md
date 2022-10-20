@@ -1,8 +1,6 @@
 # StockSystem
-Project for StockSystem
 
-
-將專案快速部署至Azure:
+＊＊＊＊將專案部署至Azure: ＊＊＊＊
 
 1. Create a Java app
 
@@ -24,3 +22,6 @@ mvn package azure-webapp:deploy
 
 成功後即可在 http://{appName}.azurewebsites.net/ 顯示出Java app內容
 
+
+＊＊＊＊Swagger URL 說明＊＊＊＊
+主要分成四個部分： 管理員 . 使用者 . 股票 . 追蹤清單
