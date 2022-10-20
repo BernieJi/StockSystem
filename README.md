@@ -14,10 +14,12 @@ cd StockSystem/SpringProject
 
 2. Configure the Maven plugin:
 
+
 mvn com.microsoft.azure:azure-webapp-maven-plugin:2.5.0:config
 
 
 3. Deploy the app:
+
 mvn package azure-webapp:deploy
 
 成功後即可在 http://{appName}.azurewebsites.net/ 顯示出Java app內容
