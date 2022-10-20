@@ -23,5 +23,12 @@ mvn package azure-webapp:deploy
 成功後即可在 http://{appName}.azurewebsites.net/ 顯示出Java app內容
 
 
+
+
 ＊＊＊＊Swagger URL 說明＊＊＊＊
 主要分成四個部分： 管理員 . 使用者 . 股票 . 追蹤清單
+
+
+管理員api:
+
+http://localhost:8081/admininfo/rawdata/{username}/giveauthority >>>根據username給予admin權限
