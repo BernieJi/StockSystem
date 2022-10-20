@@ -42,51 +42,52 @@ mvn package azure-webapp:deploy
 管理員api:
 
 
-http://localhost:8081/admininfo/rawdata/{username}/giveauthority >>>根據username給予admin權限
+/admininfo/rawdata/{username}/giveauthority >>>根據username給予admin權限
 
 
-http://localhost:8081/admininfo/rawdata/all  >>>列出系統所有使用者資訊
+/admininfo/rawdata/all  >>>列出系統所有使用者資訊
 
 
-http://localhost:8081/admininfo/rawdata/{username}/deleteuser >>>根據username刪除使用者
+/admininfo/rawdata/{username}/deleteuser >>>根據username刪除使用者
 
 
 使用者api:
 
 
-http://localhost:8081/usersinfo/{usersname}/update  >>>根據username修改用戶資料
+/usersinfo/{usersname}/update  >>>根據username修改用戶資料
 
 
-http://localhost:8081/usersinfo/rawdata/{usersname} >>>根據username查詢用戶資料
+/usersinfo/rawdata/{usersname} >>>根據username查詢用戶資料
 
 
-http://localhost:8081/usersinfo/rawdata/all >>>查詢所有用戶資訊
+/usersinfo/rawdata/all >>>查詢所有用戶資訊
 
 
-http://localhost:8081/usersinfo/rawdata/{usersid}/delete >>>刪除使用者
+/usersinfo/rawdata/{usersid}/delete >>>刪除使用者
 
 
 股票api:
 
 
-http://localhost:8081/stockinfo/rawdata/{stockcode}/{username}/addtowatchlist >>>根據stockcode與username將股票加入個人追蹤清單
+/stockinfo/rawdata/{stockcode}/{username}/addtowatchlist >>>根據stockcode與username將股票加入個人追蹤清單
 
 
-http://localhost:8081/stockinfo/rawdata/{stockcode} >>> 根據stockcode查詢股票資訊
+/stockinfo/rawdata/{stockcode} >>> 根據stockcode查詢股票資訊
 
 
-http://localhost:8081/stockinfo/rawdata/all >>> 查詢所有股票資訊
+/stockinfo/rawdata/all >>> 查詢所有股票資訊
 
 
-http://localhost:8081/stockinfo/rawdata/{stockcode}/delete >>>刪除股票
+/stockinfo/rawdata/{stockcode}/delete >>>刪除股票
+
 
 關注列表api:
 
 
-http://localhost:8081/watchlistinfo/rawdata/all >>>查詢所有關注列表資訊
+/watchlistinfo/rawdata/all >>>查詢所有關注列表資訊
 
 
-http://localhost:8081/watchlistinfo/rawdata/delete/{username}/{stockcode} >>>根據username刪除關注列表中的stock
+/watchlistinfo/rawdata/delete/{username}/{stockcode} >>>根據username刪除關注列表中的stock
 
 
 
