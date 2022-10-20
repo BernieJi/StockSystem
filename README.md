@@ -35,3 +35,8 @@ http://localhost:8081/admininfo/rawdata/{username}/giveauthority >>>根據userna
 
 
 http://localhost:8081/admininfo/rawdata/all  >>>列出系統所有使用者資訊
+
+
+http://localhost:8081/admininfo/rawdata/{username}/deleteuser >>>根據username刪除使用者
+
+
