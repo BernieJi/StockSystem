@@ -26,10 +26,13 @@ mvn package azure-webapp:deploy
 
 
 ＊＊＊＊Swagger URL 說明＊＊＊＊
+
+
 主要分成四個部分： 管理員 . 使用者 . 股票 . 追蹤清單
 
 
 管理員api:
+
 
 http://localhost:8081/admininfo/rawdata/{username}/giveauthority >>>根據username給予admin權限
 
@@ -38,5 +41,25 @@ http://localhost:8081/admininfo/rawdata/all  >>>列出系統所有使用者資�
 
 
 http://localhost:8081/admininfo/rawdata/{username}/deleteuser >>>根據username刪除使用者
+
+
+使用者api:
+
+
+http://localhost:8081/usersinfo/{usersname}/update  >>>根據username修改用戶資料
+
+
+http://localhost:8081/usersinfo/rawdata/{usersname} >>>根據username查詢用戶資料
+
+
+http://localhost:8081/usersinfo/rawdata/all >>>查詢所有用戶資訊
+
+
+http://localhost:8081/usersinfo/rawdata/{usersid}/delete >>>刪除使用者
+
+
+
+
+
 
 
