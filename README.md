@@ -74,6 +74,14 @@ http://localhost:8081/stockinfo/rawdata/all >>> 查詢所有股票資訊
 
 http://localhost:8081/stockinfo/rawdata/{stockcode}/delete >>>刪除股票
 
+關注列表api:
+
+
+http://localhost:8081/watchlistinfo/rawdata/all >>>查詢所有關注列表資訊
+
+
+http://localhost:8081/watchlistinfo/rawdata/delete/{username}/{stockcode} >>>根據username刪除關注列表中的stock
+
 
 
 
