@@ -25,6 +25,8 @@ mvn package azure-webapp:deploy
 
 
 
+
+
 ＊＊＊＊Swagger URL 說明＊＊＊＊
 
 
@@ -57,6 +59,20 @@ http://localhost:8081/usersinfo/rawdata/all >>>查詢所有用戶資訊
 
 http://localhost:8081/usersinfo/rawdata/{usersid}/delete >>>刪除使用者
 
+
+股票api:
+
+
+http://localhost:8081/stockinfo/rawdata/{stockcode}/{username}/addtowatchlist >>>根據stockcode與username將股票加入個人追蹤清單
+
+
+http://localhost:8081/stockinfo/rawdata/{stockcode} >>> 根據stockcode查詢股票資訊
+
+
+http://localhost:8081/stockinfo/rawdata/all >>> 查詢所有股票資訊
+
+
+http://localhost:8081/stockinfo/rawdata/{stockcode}/delete >>>刪除股票
 
 
 
