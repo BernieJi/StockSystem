@@ -32,3 +32,6 @@ mvn package azure-webapp:deploy
 管理員api:
 
 http://localhost:8081/admininfo/rawdata/{username}/giveauthority >>>根據username給予admin權限
+
+
+http://localhost:8081/admininfo/rawdata/all  >>>列出系統所有使用者資訊
